@@ -18,7 +18,7 @@ port = 9000
 buffersize = 4096
 
 while True:
-    q = input('[1] - get multiple car information\n[2] - get single car\n[q] - exit')
+    q = input('[1] - get multiple car information\n[2] - get single car\n[q] - exit\n')
 
     if q == '1':
         text = 'location|allcar'
