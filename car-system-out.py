@@ -1,6 +1,6 @@
 import csv
 import socket
-
+import uuid
 
 # save to csv
 
@@ -18,7 +18,10 @@ port = 9000
 buffersize = 4096
 
 
-# 
+
+car_dict = {}
+
+
 while True:
     server = socket.socket()
     server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
@@ -32,13 +35,32 @@ while True:
 
     data = client.recv(buffersize).decode('utf-8')
     print('Data from client: ', data)
-    writetocsv(data.split('|'))
 
-    # บันทึกลง CSV
+
+    source = data.split('|')[0] # มาจากโปรแกรมฝั่งไหน
     
+    if source == 'in':
+        # บันทึกข้อมูลลงใน dict
+        key = str(uuid.uuid1()).split('-')[0]
+        car_dict[key] = data.split('|')
 
-    client.send('saved'.encode('utf-8'))
-    client.close()
+        # บันทึกลง CSV
+        writetocsv(data.split('|'))
+        client.send('saved'.encode('utf-8'))
+        client.close()
+    elif source == 'location':
+        text = 'out|'
+        for k,v in car_dict.items():
+            text += k + '|'
+            for dt in v:
+                text += dt + '|'
+
+        print('Send to location: ', text)
+        client.send(text.encode('utf-8'))
+        client.close()
+    else:
+        pass
+
 
 
 

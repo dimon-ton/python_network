@@ -38,9 +38,11 @@ while True:
         d = input(v['q'])
         info[k]['value'] = d
 
+
+
     print(info)
 
-    text = ''
+    text = 'in|' # in| is a prefix from car system in
 
     for v in info.values():
         text += v['value'] + '|'
