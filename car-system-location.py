@@ -2,7 +2,7 @@ from datetime import datetime
 import socket
 import csv
 
-# test
+
 # save to csv
 
 
