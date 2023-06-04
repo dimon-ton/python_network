@@ -28,7 +28,7 @@ def splitrow(datalist, column=7):
 
 
 # address
-serverip = '172.31.196.41'
+serverip = '172.24.16.1'
 port = 9000
 buffersize = 4096
 

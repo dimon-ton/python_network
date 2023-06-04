@@ -4,7 +4,6 @@ import csv
 
 
 # save to csv
-
 def writetocsv(data):
     with open("2-car-system-in.csv", "a", newline='', encoding='utf-8') as file:
         fw = csv.writer(file)
@@ -13,7 +12,7 @@ def writetocsv(data):
 
 
 # address
-serverip = '172.31.196.41'
+serverip = '172.24.16.1'
 port = 9000
 buffersize = 4096
 
