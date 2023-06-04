@@ -11,9 +11,22 @@ def writetocsv(data):
         fw.writerow(data)
     print('csv saved')
 
+# devide data into list
+def splitrow(datalist, column=7):
+  result = []
+  buff_list = []
+  for i, t in enumerate(datalist,  start=1):
+    if i % column == 0:
+      buff_list.append(t)
+      result.append(buff_list)
+      buff_list = []
+    else:
+      buff_list.append(t)
+  return result
+
 
 # address
-serverip = '192.168.210.100'
+serverip = '172.31.196.41'
 port = 9000
 buffersize = 4096
 
@@ -38,6 +51,11 @@ while True:
     server.send(text.encode('utf-8'))
     data_server = server.recv(buffersize).decode('utf-8')
     print('Data from server: ', data_server)
+
+    data_list= data_server.split('|')[1:-1] # arrange data into data_iist
+    for row in splitrow(data_list, 7):
+      print(row)
+    
     server.close()
 
 
