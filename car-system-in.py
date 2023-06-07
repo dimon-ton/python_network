@@ -56,7 +56,7 @@ while True:
 
 
     # connect and send
-
+	# this code act as client
     server = socket.socket()
     server.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
     server.connect((serverip, port))
