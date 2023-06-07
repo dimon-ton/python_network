@@ -1,3 +1,8 @@
+'''
+
+Code in here as as server
+
+'''
 import csv
 import socket
 import uuid
