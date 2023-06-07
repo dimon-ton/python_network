@@ -13,7 +13,7 @@ def writetocsv(data):
 
 
 
-serverip_location = '172.24.16.1'
+serverip_location = '192.168.97.100'
 port_location = 9500
 buffsize_location = 4096
 
@@ -74,7 +74,7 @@ def splitrow(datalist, column=7):
 
 
 # address
-serverip = '172.24.16.1'
+serverip = '192.168.97.100'
 port = 9000
 buffersize = 4096
 

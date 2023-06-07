@@ -8,6 +8,8 @@ import socket
 import uuid
 import threading
 
+from calculate import calculate_car_hour
+
 # save to csv
 def writetocsv(data):
     with open("2-car-system-out.csv", "a", newline='', encoding='utf-8') as file:
@@ -49,6 +51,10 @@ def OutServer():
             key = str(uuid.uuid1()).split('-')[0]
             car_dict[key] = data.split('|')
 
+            # add key to value
+            car_dict[key].insert(0, key)
+
+
             # บันทึกลง CSV
             writetocsv(data.split('|'))
             client.send('saved'.encode('utf-8'))
@@ -56,7 +62,7 @@ def OutServer():
         elif source == 'location':
             text = 'out|'
             for k,v in car_dict.items():
-                text += k + '|'
+                # text += k + '|'
                 for dt in v:
                     text += dt + '|'
 
@@ -85,8 +91,9 @@ while True:
             print('[{}]'.format(i), c)
 
             # add key to c[1]
-            if c[1][0] != c[0]:
-                c[1].insert(0, c[0])
+            # if c[1][0] != c[0]:
+            #     if len(c[1]) == 6:
+            #         c[1].insert(0, c[0])
 
             car_number[str(i)] = c[1] # only value
             car_plate[c[1][4]] = c[1]
@@ -98,14 +105,28 @@ while True:
 
         q = input('Select Car: ')
         
-        if q == 'R' or q == 'r':
+        if q == 'R' or q == 'r' or q == '':
             continue
+
+
+
 
         if q == 'P' or q == 'p':
             p = input('Enter Plate Number: ')
             print(car_plate[p])
+
+            car = car_plate[p]
+
+            calculate_car_hour(car[-1])
+            
+            del car_dict[car[0]] # clear data
+
         else:
             print(car_number[q])
+            car = car_number[q]
+
+            calculate_car_hour(car[-1])
+            del car_dict[car[0]] # clear data
 
         print('-----------------------------------------')
 

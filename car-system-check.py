@@ -12,7 +12,7 @@ def writetocsv(data):
 
 
 # address
-serverip = '172.24.16.1'
+serverip = '192.168.97.100'
 port = 9500
 buffersize = 4096
 
